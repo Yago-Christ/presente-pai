@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Missão Dia dos Pais</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
+      text-align: center;
+      padding: 30px;
+    }
+    #imagem {
+      max-width: 80%;
+      margin: 20px 0;
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0f0;
+      color: #000;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .mensagem {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Missão Dia dos Pais 👨‍💻</h1>
+  <div class="mensagem" id="mensagem">Para desbloquear seu presente, responda corretamente:</div>
+  <img id="imagem" src="https://via.placeholder.com/600x300?text=Imagem+Fase+1" alt="Imagem da fase">
+  <div id="pergunta">Qual o nome do seu time do coração?</div>
+  <input type="text" id="resposta" placeholder="Digite sua resposta aqui">
+  <br><br>
+  <button onclick="verificar()">Responder</button>
+
+  <script>
+    const fases = [
+      {
+        pergunta: "Qual o nome do seu time do coração?",
+        resposta: "palmeiras",
+        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+1",
+        mensagem: "Boa! Primeira fase completa!"
+      },
+      {
+        pergunta: "Qual o prato que você mais ama?",
+        resposta: "churrasco",
+        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+2",
+        mensagem: "Essa foi fácil, né? Vamos para a próxima."
+      },
+      {
+        pergunta: "Qual o nome do seu filho(a) favorito(a)? 😎",
+        resposta: "sirilanka",
+        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+3",
+        mensagem: "Você está indo muito bem, parabéns!"
+      },
+      {
+        pergunta: "FINAL",
+        resposta: "",
+        imagem: "PLANTA-BAIXA-URL",
+        mensagem: "🎁 Parabéns! Aqui está o mapa com o local exato do seu presente!"
+      }
+    ];
+
+    let faseAtual = 0;
+
+    function verificar() {
+      const input = document.getElementById('resposta').value.toLowerCase().trim();
+      const fase = fases[faseAtual];
+
+      if (faseAtual === fases.length - 1 || input === fase.resposta) {
+        faseAtual++;
+        if (faseAtual < fases.length) {
+          atualizarFase();
+        } else {
+          document.getElementById('mensagem').innerText = "Missão concluída! Feliz Dia dos Pais!";
+          document.getElementById('pergunta').style.display = "none";
+          document.getElementById('resposta').style.display = "none";
+          document.querySelector('button').style.display = "none";
+        }
+      } else {
+        alert("Resposta incorreta! Tente novamente.");
+      }
+    }
+
+    function atualizarFase() {
+      const fase = fases[faseAtual];
+      document.getElementById('mensagem').innerText = fase.mensagem;
+      document.getElementById('imagem').src = fase.imagem;
+      document.getElementById('pergunta').innerText = fase.pergunta;
+      document.getElementById('resposta').value = "";
+    }
+  </script>
+</body>
+</html>

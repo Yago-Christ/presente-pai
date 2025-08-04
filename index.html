@@ -78,7 +78,7 @@
       },
       {
         pergunta: "FINAL",
-        resposta: "",
+        resposta: null,
         imagem: "https://via.placeholder.com/600x300?text=Mapa+do+Presente",
         mensagem: "🎁 Parabéns! Aqui está o mapa com o local exato do seu presente!",
       }
@@ -92,10 +92,9 @@
 
       let acertou = false;
 
-      if (faseAtual === fases.length - 1) {
-        // Final
-        faseAtual++;
-        atualizarFase();
+      if (fase.resposta === null) {
+        // FINAL
+        mostrarFinal();
         return;
       }
 
@@ -119,21 +118,21 @@
         document.getElementById("mensagem").innerText = fase.mensagem;
         document.getElementById("imagem").src = fase.imagem;
 
-        if (fase.pergunta === "FINAL") {
-          document.getElementById("pergunta").style.display = "none";
-          document.getElementById("resposta").style.display = "none";
-          document.querySelector("button").style.display = "none";
+        if (fase.resposta === null) {
+          mostrarFinal();
         } else {
           document.getElementById("pergunta").innerText = fase.pergunta;
           document.getElementById("resposta").value = "";
         }
-      } else {
-        document.getElementById("mensagem").innerText = "Missão concluída! Feliz Dia dos Pais!";
-        document.getElementById("pergunta").style.display = "none";
-        document.getElementById("resposta").style.display = "none";
-        document.querySelector("button").style.display = "none";
-        document.getElementById("imagem").src = "https://via.placeholder.com/600x300?text=Miss%C3%A3o+Conclu%C3%ADda";
       }
+    }
+
+    function mostrarFinal() {
+      document.getElementById("mensagem").innerText = fases[faseAtual].mensagem;
+      document.getElementById("imagem").src = fases[faseAtual].imagem;
+      document.getElementById("pergunta").style.display = "none";
+      document.getElementById("resposta").style.display = "none";
+      document.querySelector("button").style.display = "none";
     }
   </script>
 </body>

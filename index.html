@@ -71,45 +71,44 @@
   <button onclick="verificar()">Responder</button>
 
   <script>
-    const fases = [
-      {
-        pergunta: "Qual o nome do seu time do coração?",
-        resposta: ["gremio", "grêmio"],
-        imagem: "https://via.placeholder.com/600x300?text=Fase+1",
-        mensagem: "Primeira etapa concluída, Agente!"
-      },
-      {
-        pergunta: "Qual o prato que você mais ama?",
-        resposta: ["lasanha", "panqueca", "churrasco"],
-        imagem: "https://via.placeholder.com/600x300?text=Fase+2",
-        mensagem: "Você conhece seu gosto! Avançando..."
-      },
-      {
-        pergunta: "Data de nascimento do seu filho mais velho (formato **/**/**):",
-        resposta: ["08/10/09", "08-10-09", "08.10.09"],
-        imagem: "https://via.placeholder.com/600x300?text=Fase+3",
-        mensagem: "Missão em progresso... continue!"
-      },
-      {
-        pergunta: "Data de nascimento do seu filho mais novo (formato **/**/**):",
-        resposta: ["03/12/14", "03-12-14", "03.12.14"],
-        imagem: "https://via.placeholder.com/600x300?text=Fase+4",
-        mensagem: "Quase lá, agente!"
-      },
-      {
-        pergunta: "Data de nascimento da sua esposa (formato **/**/**):",
-        resposta: ["26/04/89", "26-04-89", "26.04.89"],
-        imagem: "https://via.placeholder.com/600x300?text=Fase+5",
-        mensagem: "Última barreira superada!"
-      },
-      {
-        pergunta: "FINAL",
-        resposta: null,
-        imagem: "https://via.placeholder.com/600x300?text=LOCAL+SECRETO",
-        mensagem: "🎁 Parabéns, Agente! Aqui está o mapa para encontrar seu presente!"
-      }
-    ];
-
+ const fases = [
+  {
+    pergunta: "Qual o nome do seu time do coração?",
+    resposta: "gremio",
+    imagem: "foto1.jpg",
+    mensagem: "Boa! Primeira fase completa!",
+  },
+  {
+    pergunta: "Qual o prato que você mais ama?",
+    resposta: ["lasanha", "panqueca", "churrasco"],
+    imagem: "foto2.jpg",
+    mensagem: "Essa foi fácil, né? Vamos para a próxima.",
+  },
+  {
+    pergunta: "Data de nascimento do seu filho mais velho (formato **/**/**):",
+    resposta: "08/10/09",
+    imagem: "foto3.jpg",
+    mensagem: "Você está indo muito bem, parabéns!",
+  },
+  {
+    pergunta: "Data de nascimento do seu filho mais novo (formato **/**/**):",
+    resposta: "03/12/14",
+    imagem: "foto4.jpg",
+    mensagem: "Você está quase lá!",
+  },
+  {
+    pergunta: "Data de nascimento da sua esposa (formato **/**/**):",
+    resposta: "26/04/89",
+    imagem: "foto5.jpg",
+    mensagem: "Muito bem!",
+  },
+  {
+    pergunta: "FINAL",
+    resposta: null,
+    imagem: "mapa.jpg",
+    mensagem: "🎁 Parabéns! Aqui está o mapa com o local exato do seu presente!",
+  }
+];
     let faseAtual = 0;
 
     function verificar() {

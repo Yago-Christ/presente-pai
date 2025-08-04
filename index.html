@@ -1,139 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <title>Missão Dia dos Pais</title>
+  <meta charset="UTF-8">
+  <title>Feliz Dia dos Pais!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #f1f1f1;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #1f1f1f, #4b4b4b);
+      color: white;
       text-align: center;
-      padding: 30px;
+      margin: 0;
+      padding: 0;
     }
-    #imagem {
-      max-width: 80%;
-      margin: 20px 0;
+
+    header {
+      padding: 2em;
+      background-color: #222;
     }
-    input {
-      padding: 10px;
-      width: 300px;
-      font-size: 16px;
+
+    h1 {
+      font-size: 2.5em;
+      margin: 0.5em 0;
     }
-    button {
-      padding: 10px 20px;
-      background-color: #0f0;
-      color: #000;
+
+    p {
+      font-size: 1.2em;
+      margin: 1em auto;
+      max-width: 700px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 2em auto;
+      max-width: 90vw;
+    }
+
+    .gallery img {
+      width: 200px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    .btn {
+      margin-top: 2em;
+      padding: 1em 2em;
+      font-size: 1.2em;
+      background-color: #00cc99;
+      color: black;
       border: none;
-      font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s;
     }
-    .mensagem {
-      margin: 20px 0;
-      font-size: 18px;
+
+    .btn:hover {
+      background-color: #00aa77;
+    }
+
+    footer {
+      margin-top: 4em;
+      padding: 1em;
+      background-color: #111;
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
 
-  <h1>Missão Dia dos Pais 👨‍💻</h1>
-  <div class="mensagem" id="mensagem">Para desbloquear seu presente, responda corretamente:</div>
-  <img id="imagem" src="https://via.placeholder.com/600x300?text=Imagem+Fase+1" alt="Imagem da fase" />
-  <div id="pergunta">Qual o nome do seu time do coração?</div>
-  <input type="text" id="resposta" placeholder="Digite sua resposta aqui" />
-  <br /><br />
-  <button onclick="verificar()">Responder</button>
+  <header>
+    <h1>Feliz Dia dos Pais!</h1>
+    <p>Esse presente é uma homenagem simples, mas feita com muito amor. Obrigado por tudo que você é, pai!</p>
+  </header>
+
+  <div class="gallery">
+    <img src="casa.png" alt="Casa">
+    <img src="foto1.jpg" alt="Foto 1">
+    <img src="foto2.jpg" alt="Foto 2">
+    <img src="foto3.jpeg" alt="Foto 3">
+    <img src="foto4.jpg" alt="Foto 4">
+    <img src="foto5.jpg" alt="Foto 5">
+  </div>
+
+  <button class="btn" onclick="responder()">Responder</button>
 
   <script>
-    const fases = [
-      {
-        pergunta: "Qual o nome do seu time do coração?",
-        resposta: "gremio",
-        imagem: "img/foto1.jpg",
-        mensagem: "Boa! Primeira fase completa!",
-      },
-      {
-        pergunta: "Qual o prato que você mais ama?",
-        resposta: ["lasanha", "panqueca", "churrasco"],
-        imagem: "img/foto2.jpg",
-        mensagem: "Essa foi fácil, né? Vamos para a próxima.",
-      },
-      {
-        pergunta: "Data de nascimento do seu filho mais velho (formato **/**/**):",
-        resposta: "08/10/09",
-        imagem: "img/foto3.jpeg",
-        mensagem: "Você está indo muito bem, parabéns!",
-      },
-      {
-        pergunta: "Data de nascimento do seu filho mais novo (formato **/**/**):",
-        resposta: "03/12/14",
-        imagem: "img/foto4.jpg",
-        mensagem: "Você está quase lá!",
-      },
-      {
-        pergunta: "Data de nascimento da sua esposa (formato **/**/**):",
-        resposta: "26/04/89",
-        imagem: "img/foto5.jpg",
-        mensagem: "Muito bem!",
-      },
-      {
-        pergunta: "FINAL",
-        resposta: null,
-        imagem: "img/casa.png",
-        mensagem: "🎁 Parabéns! Aqui está o mapa com o local exato do seu presente!",
-      }
-    ];
-
-    let faseAtual = 0;
-
-    function verificar() {
-      const input = document.getElementById("resposta").value.toLowerCase().trim();
-      const fase = fases[faseAtual];
-
-      let acertou = false;
-
-      if (fase.resposta === null) {
-        // FINAL
-        mostrarFinal();
-        return;
-      }
-
-      if (Array.isArray(fase.resposta)) {
-        acertou = fase.resposta.some(r => r.toLowerCase() === input);
+    function responder() {
+      const nome = prompt("Digite sua resposta para seu filho:");
+      if (nome) {
+        alert("Sua resposta foi enviada com sucesso!\n\nMensagem: " + nome);
       } else {
-        acertou = fase.resposta.toLowerCase() === input;
+        alert("Você não digitou nenhuma mensagem.");
       }
-
-      if (acertou) {
-        faseAtual++;
-        atualizarFase();
-      } else {
-        alert("Resposta incorreta! Tente novamente.");
-      }
-    }
-
-    function atualizarFase() {
-      if (faseAtual < fases.length) {
-        const fase = fases[faseAtual];
-        document.getElementById("mensagem").innerText = fase.mensagem;
-        document.getElementById("imagem").src = fase.imagem;
-
-        if (fase.resposta === null) {
-          mostrarFinal();
-        } else {
-          document.getElementById("pergunta").innerText = fase.pergunta;
-          document.getElementById("resposta").value = "";
-        }
-      }
-    }
-
-    function mostrarFinal() {
-      document.getElementById("mensagem").innerText = fases[faseAtual].mensagem;
-      document.getElementById("imagem").src = fases[faseAtual].imagem;
-      document.getElementById("pergunta").style.display = "none";
-      document.getElementById("resposta").style.display = "none";
-      document.querySelector("button").style.display = "none";
     }
   </script>
+
+  <footer>
+    Feito com amor 💙 por seu(a) filho(a)
+  </footer>
+
 </body>
 </html>

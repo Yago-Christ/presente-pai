@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Missão Dia dos Pais</title>
   <style>
     body {
@@ -38,55 +38,75 @@
 
   <h1>Missão Dia dos Pais 👨‍💻</h1>
   <div class="mensagem" id="mensagem">Para desbloquear seu presente, responda corretamente:</div>
-  <img id="imagem" src="https://via.placeholder.com/600x300?text=Imagem+Fase+1" alt="Imagem da fase">
+  <img id="imagem" src="https://via.placeholder.com/600x300?text=Imagem+Fase+1" alt="Imagem da fase" />
   <div id="pergunta">Qual o nome do seu time do coração?</div>
-  <input type="text" id="resposta" placeholder="Digite sua resposta aqui">
-  <br><br>
+  <input type="text" id="resposta" placeholder="Digite sua resposta aqui" />
+  <br /><br />
   <button onclick="verificar()">Responder</button>
 
   <script>
     const fases = [
       {
         pergunta: "Qual o nome do seu time do coração?",
-        resposta: "palmeiras",
+        resposta: "gremio",
         imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+1",
-        mensagem: "Boa! Primeira fase completa!"
+        mensagem: "Boa! Primeira fase completa!",
       },
       {
         pergunta: "Qual o prato que você mais ama?",
-        resposta: "churrasco",
+        resposta: ["lasanha", "panqueca", "churrasco"],
         imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+2",
-        mensagem: "Essa foi fácil, né? Vamos para a próxima."
+        mensagem: "Essa foi fácil, né? Vamos para a próxima.",
       },
       {
-        pergunta: "Qual o nome do seu filho(a) favorito(a)? 😎",
-        resposta: "sirilanka",
+        pergunta: "/data de nacimento do seu filho mais velho modelo **/**/**",/
+        resposta: "08/10/09",
         imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+3",
-        mensagem: "Você está indo muito bem, parabéns!"
+        mensagem: "Você está indo muito bem, parabéns!",
       },
       {
+        pergunta: "/data de nacimento do seu filho mais novo modelo **/**/**",/
+        resposta: "03/12/14",
+        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+3",
+        mensagem: "Você está quase la!",
+      },
+      {
+        pergunta: "/data de nacimento da sua esposa modelo **/**/**",/
+        resposta: "26/04/89",
+        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+3",
+        mensagem: "muito bem!",
+      },
+      /*{
         pergunta: "FINAL",
-        resposta: "",
-        imagem: "PLANTA-BAIXA-URL",
-        mensagem: "🎁 Parabéns! Aqui está o mapa com o local exato do seu presente!"
-      }
+        resposta: "",},*/
+        imagem: "casa.png",
+        mensagem: "🎁 Parabéns! Aqui está o mapa com o local exato do seu presente!",
+      
     ];
 
     let faseAtual = 0;
 
     function verificar() {
-      const input = document.getElementById('resposta').value.toLowerCase().trim();
+      const input = document.getElementById("resposta").value.toLowerCase().trim();
       const fase = fases[faseAtual];
 
-      if (faseAtual === fases.length - 1 || input === fase.resposta) {
+      let acertou = false;
+
+      if (Array.isArray(fase.resposta)) {
+        acertou = fase.resposta.some((r) => r.toLowerCase() === input);
+      } else {
+        acertou = fase.resposta.toLowerCase() === input;
+      }
+
+      if (faseAtual === fases.length - 1 || acertou) {
         faseAtual++;
         if (faseAtual < fases.length) {
           atualizarFase();
         } else {
-          document.getElementById('mensagem').innerText = "Missão concluída! Feliz Dia dos Pais!";
-          document.getElementById('pergunta').style.display = "none";
-          document.getElementById('resposta').style.display = "none";
-          document.querySelector('button').style.display = "none";
+          document.getElementById("mensagem").innerText = "Missão concluída! Feliz Dia dos Pais!";
+          document.getElementById("pergunta").style.display = "none";
+          document.getElementById("resposta").style.display = "none";
+          document.querySelector("button").style.display = "none";
         }
       } else {
         alert("Resposta incorreta! Tente novamente.");
@@ -95,10 +115,10 @@
 
     function atualizarFase() {
       const fase = fases[faseAtual];
-      document.getElementById('mensagem').innerText = fase.mensagem;
-      document.getElementById('imagem').src = fase.imagem;
-      document.getElementById('pergunta').innerText = fase.pergunta;
-      document.getElementById('resposta').value = "";
+      document.getElementById("mensagem").innerText = fase.mensagem;
+      document.getElementById("imagem").src = fase.imagem;
+      document.getElementById("pergunta").innerText = fase.pergunta;
+      document.getElementById("resposta").value = "";
     }
   </script>
 </body>

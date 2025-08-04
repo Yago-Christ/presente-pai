@@ -59,29 +59,29 @@
         mensagem: "Essa foi fácil, né? Vamos para a próxima.",
       },
       {
-        pergunta: "/data de nacimento do seu filho mais velho modelo **/**/**",/
+        pergunta: "Data de nascimento do seu filho mais velho (formato **/**/**):",
         resposta: "08/10/09",
         imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+3",
         mensagem: "Você está indo muito bem, parabéns!",
       },
       {
-        pergunta: "/data de nacimento do seu filho mais novo modelo **/**/**",/
+        pergunta: "Data de nascimento do seu filho mais novo (formato **/**/**):",
         resposta: "03/12/14",
-        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+3",
-        mensagem: "Você está quase la!",
+        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+4",
+        mensagem: "Você está quase lá!",
       },
       {
-        pergunta: "/data de nacimento da sua esposa modelo **/**/**",/
+        pergunta: "Data de nascimento da sua esposa (formato **/**/**):",
         resposta: "26/04/89",
-        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+3",
-        mensagem: "muito bem!",
+        imagem: "https://via.placeholder.com/600x300?text=Imagem+Fase+5",
+        mensagem: "Muito bem!",
       },
-      /*{
+      {
         pergunta: "FINAL",
-        resposta: "",},*/
-        imagem: "casa.png",
+        resposta: "",
+        imagem: "https://via.placeholder.com/600x300?text=Mapa+do+Presente",
         mensagem: "🎁 Parabéns! Aqui está o mapa com o local exato do seu presente!",
-      
+      }
     ];
 
     let faseAtual = 0;
@@ -92,33 +92,48 @@
 
       let acertou = false;
 
+      if (faseAtual === fases.length - 1) {
+        // Final
+        faseAtual++;
+        atualizarFase();
+        return;
+      }
+
       if (Array.isArray(fase.resposta)) {
-        acertou = fase.resposta.some((r) => r.toLowerCase() === input);
+        acertou = fase.resposta.some(r => r.toLowerCase() === input);
       } else {
         acertou = fase.resposta.toLowerCase() === input;
       }
 
-      if (faseAtual === fases.length - 1 || acertou) {
+      if (acertou) {
         faseAtual++;
-        if (faseAtual < fases.length) {
-          atualizarFase();
-        } else {
-          document.getElementById("mensagem").innerText = "Missão concluída! Feliz Dia dos Pais!";
-          document.getElementById("pergunta").style.display = "none";
-          document.getElementById("resposta").style.display = "none";
-          document.querySelector("button").style.display = "none";
-        }
+        atualizarFase();
       } else {
         alert("Resposta incorreta! Tente novamente.");
       }
     }
 
     function atualizarFase() {
-      const fase = fases[faseAtual];
-      document.getElementById("mensagem").innerText = fase.mensagem;
-      document.getElementById("imagem").src = fase.imagem;
-      document.getElementById("pergunta").innerText = fase.pergunta;
-      document.getElementById("resposta").value = "";
+      if (faseAtual < fases.length) {
+        const fase = fases[faseAtual];
+        document.getElementById("mensagem").innerText = fase.mensagem;
+        document.getElementById("imagem").src = fase.imagem;
+
+        if (fase.pergunta === "FINAL") {
+          document.getElementById("pergunta").style.display = "none";
+          document.getElementById("resposta").style.display = "none";
+          document.querySelector("button").style.display = "none";
+        } else {
+          document.getElementById("pergunta").innerText = fase.pergunta;
+          document.getElementById("resposta").value = "";
+        }
+      } else {
+        document.getElementById("mensagem").innerText = "Missão concluída! Feliz Dia dos Pais!";
+        document.getElementById("pergunta").style.display = "none";
+        document.getElementById("resposta").style.display = "none";
+        document.querySelector("button").style.display = "none";
+        document.getElementById("imagem").src = "https://via.placeholder.com/600x300?text=Miss%C3%A3o+Conclu%C3%ADda";
+      }
     }
   </script>
 </body>

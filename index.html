@@ -18,11 +18,13 @@
       text-shadow: 0 0 10px #0ff;
     }
     #imagem {
-      max-width: 90%;
+      max-width: 60%; /* Diminuído de 90% para 60% */
+      height: auto;
       border: 3px solid #0ff;
       border-radius: 12px;
-      margin: 20px 0;
+      margin: 20px auto;
       box-shadow: 0 0 20px #0ff;
+      display: block;
     }
     input {
       padding: 12px;
@@ -52,6 +54,18 @@
       font-size: 20px;
       color: #fff;
     }
+    .final {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ffd700;
+      background: rgba(0,0,0,0.6);
+      padding: 15px;
+      border-radius: 10px;
+      text-shadow: 0 0 5px #000;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
   </style>
 </head>
 <body>
@@ -63,6 +77,8 @@
   <input type="text" id="resposta" placeholder="Digite sua resposta aqui" />
   <br /><br />
   <button onclick="verificar()">Responder</button>
+
+  <div class="final" id="mensagemFinal" style="display:none;"></div>
 
   <script>
     const fases = [
@@ -81,7 +97,7 @@
       {
         pergunta: "Data de nascimento do seu filho mais velho (formato **/**/**):",
         resposta: "08/10/09",
-        imagem: "foto3.jpeg", /* Corrigido para .jpeg */
+        imagem: "foto3.jpeg",
         mensagem: "Você está indo muito bem, parabéns!",
       },
       {
@@ -99,7 +115,7 @@
       {
         pergunta: "FINAL",
         resposta: null,
-        imagem: "casa.png", /* Corrigido para imagem existente */
+        imagem: "casa.png",
         mensagem: "🎁 Parabéns! Aqui está o mapa com o local exato do seu presente!",
       }
     ];
@@ -152,6 +168,16 @@
       document.getElementById("pergunta").style.display = "none";
       document.getElementById("resposta").style.display = "none";
       document.querySelector("button").style.display = "none";
+
+      document.getElementById("mensagemFinal").style.display = "block";
+      document.getElementById("mensagemFinal").innerHTML = `
+        <strong>Assim como Frodo carregou o Um Anel até Mordor</strong>, você, meu pai, agora carrega a missão de encontrar o Tesouro dos Pais.<br><br>
+        O caminho será repleto de segredos e surpresas, mas lembre-se:<br>
+        <em>Não importa o quão longa seja a jornada, o amor de sua família é a luz que nunca se apaga.</em><br><br>
+        Siga o mapa com coragem, pois nele está o destino do seu presente.<br>
+        E, como diria Gandalf: <q>Tudo o que temos de decidir é o que fazer com o tempo que nos é dado.</q><br><br>
+        <strong>Agora é sua vez, herói. A aventura o espera…</strong>
+      `;
     }
   </script>
 </body>
